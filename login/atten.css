@@ -1,0 +1,63 @@
+h1 {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Roboto', sans-serif;
+  padding: 20px;
+  margin: 20px;
+}
+input,select {
+padding: 10px;
+display: inline-block;
+border: 1px solid white;
+border-radius: 4px;
+box-sizing: border-box;
+font-family: 'Roboto', sans-serif;
+color: rgb(30, 32, 33);
+font-size: 15px;
+}
+
+table{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 20px;
+  border-radius: 15px;
+}
+label{
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  padding: 10px;
+}
+body{
+  background-color: aliceblue;
+}
+
+
+.logo{
+  border:solid black;
+}
+.logo img {
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+button{
+  padding: 10px 20px;
+  background-color: rgb(76, 196, 76);
+  color: rgb(255, 255, 255);
+  margin: 8px 0px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover{
+  background-color: green;
+}
+a{
+  text-decoration: none;
+  color: rgb(0, 136, 255);
+}
