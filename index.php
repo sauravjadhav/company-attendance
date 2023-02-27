@@ -7,6 +7,7 @@ if (!isset($_SESSION['username'])) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,17 +19,18 @@ if (!isset($_SESSION['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENATTS ATTENDANCE FORM</title>
 </head>
+
 <body>
     <h1>
         <div class="logo"><img src="enats-logo.png" alt="logo"> ATTENDANCE FORM
     </h1>
     </div>
-    <form>
+    <form action="insert.php" method="post">
         <table>
             <div class="container">
                 <tr class="Name">
                     <td> <label for="name">Name:</label></td>
-                    <td> <input type="search" id="name" name="name"><br><br></td>
+                    <td> <input type="search" id="name" name="name" value="<?php echo $_SESSION['username']; ?>"><br><br></td>
                 </tr>
                 <tr class="Office In Time">
                     <td><label for="time">Office In Time:</label></td>
@@ -36,29 +38,69 @@ if (!isset($_SESSION['username'])) {
                 </tr>
                 <tr class="company">
                     <td><label for="company">Company:</label></td>
-                    <td><select name="company" id="company">
-                            <option value="Training">Training</option>
-                            <option value="sample">sample</option>
-                            <option value="sample">sample</option>
-                            <option value="sample">sample</option>
-                        </select></td>
+                    <td>
+                        <select name="company" id="company">
+                            <?php
+                            // Connect to the database
+                            $conn = mysqli_connect("localhost", "root", "", "login");
 
+                            // Check connection
+                            if (!$conn) {
+                                die("Connection failed: " . mysqli_connect_error());
+                            }
+
+                            // Query the database to fetch company names
+                            $sql = "SELECT name FROM company";
+                            $result = mysqli_query($conn, $sql);
+
+                            // Generate HTML options for each company
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
+                                }
+                            }
+                            // Close the database connection
+                            mysqli_close($conn);
+                            ?>
+                        </select>
+                    </td>
                 </tr>
+
                 <tr class=" Project">
                     <td><label for="project"> Company Project:</label></td>
-                    <td><select name="project" id="project">
-                            <option value="Training">Training</option>
-                            <option value="sample">sample</option>
-                            <option value="sample">sample</option>
-                            <option value="sample">sample</option>
-                        </select></td>
+                    <td>
+                        <select name="project" id="project">
+                            <?php
+                            // Connect to the database
+                            $conn = mysqli_connect("localhost", "root", "", "login");
+
+                            // Check connection
+                            if (!$conn) {
+                                die("Connection failed: " . mysqli_connect_error());
+                            }
+
+                            // Query the database to fetch project names
+                            $sql = "SELECT name FROM projects";
+                            $result = mysqli_query($conn, $sql);
+
+                            // Generate HTML options for each project
+                            if (mysqli_num_rows($result) > 0) {
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    echo "<option value='" . $row["name"] . "'>" . $row["name"] . "</option>";
+                                }
+                            }
+                            // Close the database connection
+                            mysqli_close($conn);
+                            ?>
+                        </select>
+                    </td>
                 </tr>
                 <tr class="project Start Time">
                     <td><label for="time">Project Start Time:</label></td>
                     <td><input type="time" id="time" name="time"><br><br></td>
                 </tr>
                 <tr class="Company leader Name">
-                    <td><label for="leader">Company Leader Name:</label></td>
+                    <td><label for="leader">Project Leader Name:</label></td>
                     <td><input type="text" id="Company Leader Name" name="Company Leader Name"><br><br></td>
                 </tr>
                 <tr class="Task/Queries">
@@ -78,9 +120,13 @@ if (!isset($_SESSION['username'])) {
                     <td><input type="text" id="Commit No" name="Commit No"><br><br></td>
                 </tr>
                 <tr>
+                    <td>
+                        <a href="logout.php">Logout</a>
+                    </td>
                     <td><button type="submit" value="Submit">Submit</button></td>
                 </tr>
         </table>
     </form>
 </body>
+
 </html>
